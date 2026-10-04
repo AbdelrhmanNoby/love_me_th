@@ -2,131 +2,467 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هتحبيني ولا لا</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>هتحبيني ولا لا ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=El+Messiri:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+        :root {
+            --primary-rose: #ff2a6d;
+            --secondary-rose: #ff6584;
+            --heart-red: #e63946;
+            --love-purple: #c77dff;
+            --glow-pink: rgba(255, 42, 109, 0.45);
+            --glass-bg: rgba(255, 255, 255, 0.84);
+            --glass-border: rgba(255, 255, 255, 0.92);
+            --text-dark: #3a0ca3;
+            --text-romantic: #7209b7;
+            --card-shadow: 0 20px 50px rgba(214, 40, 57, 0.22), 0 0 35px rgba(255, 182, 193, 0.4);
+        }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo', 'El Messiri', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         body {
+            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-            overflow: hidden;
+            background: radial-gradient(circle at 20% 20%, #ffe5ec 0%, #ffc2d1 35%, #e8dff5 70%, #fde2e4 100%);
+            overflow-x: hidden;
+            overflow-y: auto;
             flex-direction: column;
             text-align: center;
             position: relative;
+            padding: 70px 12px 20px 12px;
         }
 
-        #particles-js {
-            position: absolute;
+        /* Romantic Ambient Background Glows */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.65;
+            animation: floatGlow 10s ease-in-out infinite alternate;
+        }
+
+        .ambient-1 {
+            top: -10%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ff758f, #ff4d6d);
+        }
+
+        .ambient-2 {
+            bottom: -15%;
+            right: -10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, #c77dff, #ff8fa3);
+            animation-delay: -5s;
+        }
+
+        .ambient-3 {
+            top: 40%;
+            right: 15%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, #ffb3c1, #ffccd5);
+            animation-duration: 8s;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(35px, 25px) scale(1.15); }
+        }
+
+        #hearts-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
             pointer-events: none;
         }
 
-        .main-container {
-            background: rgba(255, 255, 255, 0.7);
+        /* Top Header Bar (Clean, Non-Overlapping) */
+        .top-header {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            z-index: 200;
+            pointer-events: none;
+        }
+
+        .top-love-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: clamp(0.74rem, 2.7vw, 0.86rem);
+            font-weight: 700;
+            color: #d81159;
+            box-shadow: 0 4px 15px rgba(255, 42, 109, 0.15);
+            letter-spacing: 0.2px;
+            pointer-events: auto;
+            white-space: nowrap;
+            animation: softPulse 2.5s infinite ease-in-out;
+        }
+
+        .sound-toggle-btn {
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            max-width: 90%;
-            width: 420px;
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #ff2a6d;
+            box-shadow: 0 4px 15px rgba(255, 42, 109, 0.2);
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+            flex-shrink: 0;
+        }
+
+        .sound-toggle-btn:hover {
+            transform: scale(1.12) rotate(10deg);
+            box-shadow: 0 6px 20px rgba(255, 42, 109, 0.35);
+        }
+
+        /* Main Card Container */
+        .main-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 26px 20px;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--glass-border);
+            max-width: min(92vw, 420px);
+            width: 100%;
+            margin: auto;
             z-index: 10;
-            transition: all 0.5s ease;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
+        /* Card Shimmer Border */
+        .main-container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 32px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255, 42, 109, 0.6), rgba(255, 255, 255, 0.9), rgba(255, 182, 193, 0.8), rgba(255, 77, 109, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.85;
+            animation: borderRotate 6s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        /* Floating Corner Stickers */
+        .sticker {
+            position: absolute;
+            font-size: 1.5rem;
+            pointer-events: none;
+            z-index: 15;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1));
+            animation: stickerFloat 3s ease-in-out infinite alternate;
+        }
+
+        .sticker-tl {
+            top: -14px;
+            right: -10px;
+            transform: rotate(15deg);
+            animation-delay: 0s;
+        }
+
+        .sticker-br {
+            bottom: -12px;
+            left: -10px;
+            transform: rotate(-15deg);
+            animation-delay: 1.5s;
+        }
+
+        .sticker-tr {
+            top: 20px;
+            left: -14px;
+            font-size: 1.3rem;
+            transform: rotate(-20deg);
+            animation-delay: 0.8s;
+        }
+
+        @keyframes stickerFloat {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-7px) scale(1.1); }
+        }
+
+        /* Title Styling */
         h1 {
-            color: #d63031;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
+            font-family: 'El Messiri', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #d81159 0%, #ff2a6d 50%, #c77dff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: clamp(1.65rem, 5vw, 2.1rem);
+            font-weight: 800;
+            margin-bottom: 6px;
+            text-shadow: 0 4px 15px rgba(255, 42, 109, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+            line-height: 1.3;
         }
 
+        .sub-romantic-quote {
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            color: #8c2a5e;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            opacity: 0.92;
+        }
+
+        /* Image Frame Styling */
         .image-container {
             position: relative;
+            margin: 0 auto;
+            display: inline-block;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .image-frame {
+            position: relative;
+            border-radius: 22px;
+            padding: 5px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 182, 193, 0.6));
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.22), inset 0 0 12px rgba(255, 255, 255, 0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-frame:hover {
+            transform: scale(1.02) rotate(-1deg);
         }
 
         .image-container img {
             width: 100%;
-            max-width: 280px;
-            max-height: 350px;
+            max-height: 230px;
             object-fit: contain;
+            border-radius: 18px;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s ease;
+        }
+
+        /* Floating Mini Heart Halo on Image */
+        .image-heart-halo {
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff477e, #ff0a54);
+            color: white;
+            padding: 3px 12px;
             border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: transform 0.4s ease;
-            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(255, 10, 84, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 5;
+            white-space: nowrap;
+            animation: softPulse 2s infinite ease-in-out;
         }
 
-        .image-container img:hover {
-            transform: scale(1.03);
+        @keyframes softPulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.06); }
         }
 
+        /* Buttons Container */
         .buttons-container {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin-top: 35px;
-            height: 60px;
             align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+            min-height: 52px;
+            position: relative;
         }
 
         button {
             border: none;
-            padding: 15px 40px;
-            font-size: 1.3rem;
+            padding: 12px 28px;
+            font-size: 1.15rem;
             font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
             color: white;
             outline: none;
-            z-index: 100;
-        }
-
-        #btn-yes {
-            background: linear-gradient(135deg, #00b894, #55efc4);
-        }
-        
-        #btn-yes:hover {
-            box-shadow: 0 8px 25px rgba(0, 184, 148, 0.5);
-            transform: translateY(-3px);
-        }
-
-        #btn-no {
-            background: linear-gradient(135deg, #d63031, #ff7675);
             position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.2px;
         }
 
-        /* Popup Styles */
+        /* Yes Button Styling */
+        #btn-yes {
+            background: linear-gradient(135deg, #ff0a54 0%, #ff477e 50%, #ff70a6 100%);
+            box-shadow: 0 8px 22px rgba(255, 10, 84, 0.38), 0 0 12px rgba(255, 71, 126, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            z-index: 100;
+            animation: yesHeartbeat 1.8s infinite ease-in-out;
+        }
+
+        #btn-yes::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: rotate(25deg);
+            animation: shineSweeper 3s infinite ease-in-out;
+        }
+
+        @keyframes shineSweeper {
+            0% { left: -60%; }
+            35%, 100% { left: 130%; }
+        }
+
+        @keyframes yesHeartbeat {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 22px rgba(255, 10, 84, 0.38); }
+            20% { transform: scale(1.05); box-shadow: 0 12px 28px rgba(255, 10, 84, 0.55); }
+            35% { transform: scale(0.98); }
+            50% { transform: scale(1.06); box-shadow: 0 14px 32px rgba(255, 10, 84, 0.65); }
+        }
+
+        #btn-yes:hover {
+            transform: scale(1.08) !important;
+            box-shadow: 0 14px 32px rgba(255, 10, 84, 0.6), 0 0 20px rgba(255, 112, 166, 0.45) !important;
+        }
+
+        #btn-yes:active {
+            transform: scale(0.96) !important;
+        }
+
+        /* No Button Styling */
+        #btn-no {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 99;
+            color: #f8f9fa;
+            white-space: nowrap;
+            position: relative;
+            overflow: visible;
+        }
+
+        /* Dodge Speech Bubble (Glued right on top of No button) */
+        .dodge-bubble {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) scale(0.85);
+            background: rgba(35, 5, 18, 0.94);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #ffe5ec;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            pointer-events: none;
+            z-index: 2000;
+            white-space: nowrap;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 112, 166, 0.6);
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dodge-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(35, 5, 18, 0.94);
+        }
+
+        .dodge-bubble.active {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* Popup Overlay & Modal */
         .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(8px);
+            background: rgba(30, 5, 15, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.5s ease;
-            z-index: 1000;
+            transition: opacity 0.4s ease;
+            z-index: 3000;
+            padding: 15px;
         }
 
         .popup-overlay.active {
@@ -135,197 +471,703 @@
         }
 
         .popup-content {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px 30px;
-            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 2px solid rgba(255, 255, 255, 0.95);
+            padding: 26px 18px;
+            border-radius: 26px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            transform: scale(0.7);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 60px rgba(214, 40, 57, 0.35), 0 0 30px rgba(255, 182, 193, 0.4);
+            transform: scale(0.7) translateY(20px);
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
             max-width: 90%;
-            width: 380px;
+            width: 350px;
+            position: relative;
         }
 
         .popup-overlay.active .popup-content {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #ffe5ec;
+            color: #d81159;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
         .popup-content h2 {
-            color: #2d3436;
-            margin-bottom: 25px;
-            font-size: 1.7rem;
+            font-family: 'El Messiri', 'Cairo', sans-serif;
+            color: #4a0e2e;
+            margin-bottom: 14px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .popup-content .popup-img-frame {
+            border-radius: 18px;
+            padding: 4px;
+            background: linear-gradient(135deg, #ff758f, #ffb3c1);
+            display: inline-block;
+            box-shadow: 0 8px 22px rgba(255, 77, 109, 0.22);
+            max-width: 100%;
         }
 
         .popup-content img {
             width: 100%;
-            max-width: 250px;
-            max-height: 350px;
+            max-width: 210px;
+            max-height: 240px;
             object-fit: contain;
-            border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            border-radius: 14px;
+            display: block;
+        }
+
+        /* Success Love Celebration Section */
+        .celebration-box {
+            display: none;
+            animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            margin-top: 14px;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.88); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .love-meter {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 112, 166, 0.4);
+            border-radius: 18px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.12);
+        }
+
+        .love-meter-title {
+            font-size: 0.9rem;
+            color: #d81159;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .love-meter-bar {
+            height: 12px;
+            background: #ffe5ec;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .love-meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff758f, #ff0a54, #d81159);
+            border-radius: 10px;
+            transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+        }
+
+        .love-meter-fill::after {
+            content: '💖';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 13px;
+        }
+
+        .love-notes-ribbon {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            color: #4a0e2e;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            line-height: 1.4;
+        }
+
+        /* Mouse / Touch Interactive Heart Sparkles */
+        .cursor-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.2rem;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            animation: cursorHeartAnim 0.9s ease-out forwards;
+        }
+
+        @keyframes cursorHeartAnim {
+            0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; }
+            100% { transform: translate(-50%, -80px) scale(1.35) rotate(25deg); opacity: 0; }
         }
 
         /* Mobile specific adjustments */
         @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            button { padding: 12px 30px; font-size: 1.1rem; }
-            .popup-content h2 { font-size: 1.4rem; }
-            .main-container { padding: 30px 20px; width: 95%; }
+            body { padding: 65px 8px 15px 8px; }
+            .top-header { padding: 0 10px; top: 10px; }
+            .top-love-badge { font-size: 0.74rem; padding: 4px 10px; gap: 4px; }
+            .sound-toggle-btn { width: 34px; height: 34px; font-size: 0.95rem; }
+            .main-container { padding: 20px 15px; border-radius: 24px; }
+            h1 { font-size: 1.6rem; margin-bottom: 4px; }
+            .sub-romantic-quote { font-size: 0.78rem; margin-bottom: 12px; }
+            .image-container { max-width: 220px; }
+            .image-container img { max-height: 200px; }
+            button { padding: 10px 22px; font-size: 1.05rem; gap: 6px; }
+            .popup-content { padding: 20px 14px; width: 92%; border-radius: 20px; }
+            .popup-content h2 { font-size: 1.3rem; margin-bottom: 10px; }
+            .popup-content img { max-width: 180px; max-height: 210px; }
+            .sticker { font-size: 1.25rem; }
+        }
+
+        @media (max-width: 360px) {
+            h1 { font-size: 1.45rem; }
+            button { padding: 8px 16px; font-size: 0.95rem; }
+            .image-container { max-width: 190px; }
+            .image-container img { max-height: 170px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
+    <!-- Ambient Glowing Backdrops -->
+    <div class="ambient-glow ambient-1"></div>
+    <div class="ambient-glow ambient-2"></div>
+    <div class="ambient-glow ambient-3"></div>
 
+    <!-- Floating Canvas for Realistic Multi-Sized Hearts & Petals -->
+    <canvas id="hearts-canvas"></canvas>
+
+    <!-- Top Non-Overlapping Header Bar -->
+    <header class="top-header">
+        <!-- <div class="top-love-badge">
+            <span>✨</span>
+            <span>سؤال من أعمق نقطة في قلبي</span>
+            <span>💌</span>
+        </div> -->
+        <button class="sound-toggle-btn" id="sound-btn" title="تشغيل / كتم النغمات الرومانسية" aria-label="Toggle Sound">
+            🎵
+        </button>
+    </header>
+
+    <!-- Main Love Card Container -->
     <div class="main-container" id="main-view">
+        <!-- Cute Floating Decorative Stickers -->
+        <span class="sticker sticker-tl">💖</span>
+        <span class="sticker sticker-br">🌹</span>
+        <span class="sticker sticker-tr">✨</span>
+
         <h1 id="main-title">هتحبيني ولا لا</h1>
+        <p class="sub-romantic-quote" id="sub-quote">
+            <span>🌸</span>
+            <span>فكري كويس قبل ما تجاوبي.. مفيش غير إجابة واحدة صح!</span>
+            <span>🌸</span>
+        </p>
+
         <div class="image-container">
-            <img src="img/1.jpg" id="main-image" alt="Image 1">
+            <!-- <div class="image-heart-halo" id="image-badge">
+                <span>💕</span>
+                <span>بستنى ردك بحب</span>
+                <span>💕</span>
+            </div> -->
+            <div class="image-frame">
+                <img src="img/1.jpg" id="main-image" alt="Love Question Image">
+            </div>
         </div>
+
         <div class="buttons-container" id="buttons-area">
-            <button id="btn-yes">ماشي</button>
-            <button id="btn-no">لا</button>
+            <button id="btn-yes">
+                <span>هحبك اوي</span>
+                <span>💖</span>
+            </button>
+            <button id="btn-no">
+                <span>لا</span>
+                <span>💔</span>
+                <span class="dodge-bubble" id="dodge-tip">مش هتلحقيني 😜</span>
+            </button>
+        </div>
+
+        <!-- Extra Romantic Celebration Box (Revealed on YES) -->
+        <div class="celebration-box" id="celebration-box">
+            <div class="love-meter">
+                <div class="love-meter-title">
+                    <span>مقياس العشق والغرام</span>
+                    <span id="meter-num">1000% ∞</span>
+                </div>
+                <div class="love-meter-bar">
+                    <div class="love-meter-fill" id="meter-fill"></div>
+                </div>
+            </div>
+            <div class="love-notes-ribbon">
+                <span>💍</span>
+                <span>وعد هفضل اجبلك لحمة !</span>
+                <span>✨</span>
+            </div>
         </div>
     </div>
 
-    <!-- Popup -->
+    <!-- Popup Modal -->
     <div class="popup-overlay" id="popup">
         <div class="popup-content">
-            <h2 id="popup-title">انا مستني تدوسي ماشي</h2>
-            <img src="img/2.jpg" id="popup-image" alt="Popup Image">
+            <!-- <div class="popup-badge">
+                <span>💌</span>
+                <span>تذكير لطيف جداً</span>
+            </div> -->
+            <h2 id="popup-title">انا مستني تدوسي هحبك</h2>
+            <div class="popup-img-frame">
+                <img src="img/2.jpg" id="popup-image" alt="Popup Image">
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": ["#ff7675", "#fd79a8", "#fab1a0"] },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.6, "random": true },
-                "size": { "value": 15, "random": true },
-                "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 2, "direction": "top", "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": {
-                    "onhover": { "enable": true, "mode": "bubble" },
-                    "onclick": { "enable": true, "mode": "repulse" }
-                },
-                "modes": {
-                    "bubble": { "distance": 250, "size": 20, "duration": 2, "opacity": 1 },
-                    "repulse": { "distance": 400, "duration": 0.4 }
+        /* ==========================================================
+           1. Web Audio API - Synthesized Romantic Chimes & Harps
+           ========================================================== */
+        let audioCtx = null;
+        let soundEnabled = true;
+        const soundBtn = document.getElementById('sound-btn');
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
                 }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            soundEnabled = !soundEnabled;
+            soundBtn.innerText = soundEnabled ? '🎵' : '🔇';
+            soundBtn.style.opacity = soundEnabled ? '1' : '0.6';
+            if (soundEnabled) {
+                initAudio();
+                playChime([523.25, 659.25, 783.99, 1046.50]);
             }
         });
 
+        function playRomanticTone(freq, type = 'sine', duration = 0.6, delay = 0) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                
+                setTimeout(() => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    
+                    osc.type = type;
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    
+                    gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.18, audioCtx.currentTime + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + duration);
+                }, delay * 1000);
+            } catch(err) {}
+        }
+
+        function playChime(notes) {
+            notes.forEach((freq, idx) => {
+                playRomanticTone(freq, 'sine', 0.8, idx * 0.12);
+            });
+        }
+
+        function playDodgeSound() {
+            playRomanticTone(440, 'triangle', 0.25, 0);
+            playRomanticTone(587.33, 'triangle', 0.3, 0.08);
+        }
+
+        function playCelebrationSymphony() {
+            const chords = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+            chords.forEach((freq, i) => {
+                playRomanticTone(freq, 'sine', 1.5, i * 0.15);
+            });
+            setTimeout(() => {
+                const finale = [659.25, 783.99, 987.77, 1318.51];
+                finale.forEach((freq, i) => {
+                    playRomanticTone(freq, 'triangle', 2.0, i * 0.12);
+                });
+            }, 800);
+        }
+
+        /* ==========================================================
+           2. Romantic Canvas Heart & Petal Particles Engine
+           ========================================================== */
+        const canvas = document.getElementById('hearts-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const heartsArray = [];
+        const heartSymbols = ['❤️', '💖', '💕', '💗', '💓', '🌸', '✨'];
+        let celebrationMode = false;
+
+        class RomanticHeart {
+            constructor(isExplosion = false, originX = null, originY = null) {
+                this.reset(isExplosion, originX, originY);
+            }
+
+            reset(isExplosion = false, originX = null, originY = null) {
+                this.isExplosion = isExplosion;
+                this.symbol = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                this.size = Math.random() * 18 + 12;
+                
+                if (isExplosion) {
+                    this.x = originX || width / 2;
+                    this.y = originY || height / 2;
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 8 + 3;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed - 2;
+                    this.gravity = 0.12;
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.015 + 0.008;
+                } else {
+                    this.x = Math.random() * width;
+                    this.y = height + Math.random() * 50;
+                    this.vx = (Math.random() - 0.5) * 1.5;
+                    this.vy = -(Math.random() * 2 + 1.2);
+                    this.gravity = 0;
+                    this.alpha = Math.random() * 0.6 + 0.3;
+                    this.decay = 0;
+                }
+
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 2;
+                this.swaySpeed = Math.random() * 0.03 + 0.01;
+                this.swayOffset = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                if (this.isExplosion) {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vy += this.gravity;
+                    this.alpha -= this.decay;
+                    this.rotation += this.rotSpeed * 3;
+                    if (this.alpha <= 0) return false;
+                } else {
+                    this.swayOffset += this.swaySpeed;
+                    this.x += this.vx + Math.sin(this.swayOffset) * 0.8;
+                    this.y += this.vy;
+                    this.rotation += this.rotSpeed;
+
+                    if (this.y < -50 || this.x < -50 || this.x > width + 50) {
+                        this.reset(false);
+                    }
+                }
+                return true;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.font = `${this.size}px "Segoe UI Emoji", "Apple Color Emoji", Cairo, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.symbol, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        const baseHeartCount = window.innerWidth < 600 ? 25 : 45;
+        for (let i = 0; i < baseHeartCount; i++) {
+            const h = new RomanticHeart(false);
+            h.y = Math.random() * height;
+            heartsArray.push(h);
+        }
+
+        function animateHearts() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = heartsArray.length - 1; i >= 0; i--) {
+                const heart = heartsArray[i];
+                const alive = heart.update();
+                if (alive) {
+                    heart.draw();
+                } else {
+                    heartsArray.splice(i, 1);
+                }
+            }
+
+            if (celebrationMode && heartsArray.length < 160 && Math.random() < 0.4) {
+                triggerConfettiBurst(Math.random() * width, Math.random() * height * 0.6, 6);
+            }
+
+            requestAnimationFrame(animateHearts);
+        }
+        animateHearts();
+
+        function triggerConfettiBurst(x, y, count = 35) {
+            for (let i = 0; i < count; i++) {
+                heartsArray.push(new RomanticHeart(true, x, y));
+            }
+        }
+
+        /* ==========================================================
+           3. Mouse / Touch Moving Heart Trail
+           ========================================================== */
+        let lastTrailTime = 0;
+        function createHeartSparkle(x, y) {
+            const now = Date.now();
+            if (now - lastTrailTime < 75) return;
+            lastTrailTime = now;
+
+            const sparkle = document.createElement('div');
+            sparkle.className = 'cursor-heart';
+            const icons = ['💖', '💕', '✨', '🌸', '❤️'];
+            sparkle.innerText = icons[Math.floor(Math.random() * icons.length)];
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 900);
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            createHeartSparkle(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches && e.touches[0]) {
+                createHeartSparkle(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        /* ==========================================================
+           4. Dodge "No" Button Logic (Never Disappears / Infinite Escape)
+           ========================================================== */
         const btnNo = document.getElementById('btn-no');
         const btnYes = document.getElementById('btn-yes');
         const mainTitle = document.getElementById('main-title');
+        const subQuote = document.getElementById('sub-quote');
         const mainImage = document.getElementById('main-image');
         const buttonsArea = document.getElementById('buttons-area');
         const mainContainer = document.getElementById('main-view');
-
+        const dodgeTip = document.getElementById('dodge-tip');
+        const celebrationBox = document.getElementById('celebration-box');
+        const meterFill = document.getElementById('meter-fill');
+        const imageBadge = document.getElementById('image-badge');
         const popup = document.getElementById('popup');
         const popupTitle = document.getElementById('popup-title');
         const popupImage = document.getElementById('popup-image');
 
+        const playfulDodgePhrases = [
+            "مش هتلحقيني 😜",
+            "وقعتي في حبي خلاص 🤭",
+            "مفيش مفر من حبي 💖",
+            "حاولي تاني 😂",
+            "مفيش زرار (لا) هنا 🙈",
+            "قلبي بيقول هتحبيني 🥺❤️",
+            "سهم كيوبيد صابك خلاص 💘",
+            "قولي هحبك وبطلي شقاوة 🥩❤️"
+        ];
+        let dodgeCount = 0;
         let isMoved = false;
+        let success = false;
 
-        function moveButton() {
-            const btnWidth = btnNo.offsetWidth;
-            const btnHeight = btnNo.offsetHeight;
-            
-            // Safe zone to prevent pushing button out of window boundaries
-            const safeWidth = window.innerWidth - btnWidth - 40;
-            const safeHeight = window.innerHeight - btnHeight - 40;
+        function moveButton(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            if (success) return;
 
-            const randomX = Math.max(20, Math.floor(Math.random() * safeWidth));
-            const randomY = Math.max(20, Math.floor(Math.random() * safeHeight));
+            playDodgeSound();
 
+            const btnWidth = btnNo.offsetWidth || 100;
+            const btnHeight = btnNo.offsetHeight || 45;
+
+            // Safe horizontal margins: generous padding so it never hugs left or right edges
+            const padX = Math.max(45, Math.floor(window.innerWidth * 0.15));
+            const minX = padX;
+            const maxX = Math.max(minX + 20, window.innerWidth - btnWidth - padX);
+
+            // Safe vertical boundaries: keep strictly within the upper/middle visible zone
+            const minY = 85; // Below header & speech bubble
+            const maxY = Math.max(minY + 30, Math.floor(window.innerHeight * 0.68) - btnHeight);
+
+            // Calculate safe random coordinates in clearly visible screen space
+            let randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+            let randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+
+            // Move button
             btnNo.style.position = 'fixed';
+            btnNo.style.margin = '0';
+            btnNo.style.right = 'auto';
+            btnNo.style.bottom = 'auto';
             btnNo.style.left = randomX + 'px';
             btnNo.style.top = randomY + 'px';
-            
-            if(!isMoved) {
-                // Adjust buttons area to space properly when "No" goes fixed
+            btnNo.style.zIndex = '1500';
+            btnNo.style.display = 'inline-flex';
+            btnNo.style.visibility = 'visible';
+            btnNo.style.opacity = '1';
+
+            // Show speech bubble directly attached to the button
+            const phrase = playfulDodgePhrases[dodgeCount % playfulDodgePhrases.length];
+            dodgeCount++;
+            dodgeTip.innerText = phrase;
+            dodgeTip.classList.add('active');
+
+            clearTimeout(window.tipTimeout);
+            window.tipTimeout = setTimeout(() => {
+                dodgeTip.classList.remove('active');
+            }, 1600);
+
+            triggerConfettiBurst(randomX + btnWidth / 2, randomY + btnHeight / 2, 6);
+
+            if (!isMoved) {
                 buttonsArea.style.justifyContent = 'center';
                 isMoved = true;
             }
         }
 
         btnNo.addEventListener('mouseover', moveButton);
-        btnNo.addEventListener('touchstart', (e) => {
-            e.preventDefault(); 
-            moveButton();
+        btnNo.addEventListener('touchstart', moveButton, { passive: false });
+        btnNo.addEventListener('pointerdown', moveButton);
+        btnNo.addEventListener('click', moveButton);
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+
+            // Re-adjust escaped button inside new bounds if screen resized
+            if (isMoved && !success) {
+                const btnRect = btnNo.getBoundingClientRect();
+                const padX = Math.max(45, Math.floor(window.innerWidth * 0.15));
+                const minX = padX;
+                const maxX = Math.max(minX + 20, window.innerWidth - (btnRect.width || 100) - padX);
+                const maxY = Math.floor(window.innerHeight * 0.68) - (btnRect.height || 45);
+
+                let currentLeft = parseFloat(btnNo.style.left) || minX;
+                let currentTop = parseFloat(btnNo.style.top) || 85;
+
+                if (currentLeft < minX) btnNo.style.left = minX + 'px';
+                if (currentLeft > maxX) btnNo.style.left = maxX + 'px';
+                if (currentTop > maxY) btnNo.style.top = Math.max(85, maxY) + 'px';
+            }
         });
 
-        // Setup popups
+        /* ==========================================================
+           5. Setup Romantic Periodic Popups
+           ========================================================== */
         let popupStage = 1;
         let popupTimer;
-        let success = false;
 
         function showPopup() {
-            if (success) return; 
+            if (success) return;
 
             if (popupStage === 1) {
-                popupTitle.innerText = "انا مستني تدوسي ماشي";
+                popupTitle.innerText = "انا مستني تدوسي هحبك 🥺❤️";
                 popupImage.src = "img/2.jpg";
-                popupStage = 2; 
+                popupStage = 2;
             } else {
-                popupTitle.innerText = "ما تقولي ماشي بقا";
+                popupTitle.innerText = "ما تقولي هحبك بقا يا ستي 🙈💕";
                 popupImage.src = "img/3.png";
+                popupStage = 1;
             }
 
             popup.classList.add('active');
+            playRomanticTone(523.25, 'sine', 0.5, 0);
 
             setTimeout(() => {
                 popup.classList.remove('active');
                 if (!success) {
                     startPopupTimer();
                 }
-            }, 3000); 
+            }, 3200);
         }
 
         function startPopupTimer() {
             clearTimeout(popupTimer);
             popupTimer = setTimeout(() => {
                 if (!success) showPopup();
-            }, 5000); 
+            }, 5500);
         }
 
         window.addEventListener('load', () => {
             startPopupTimer();
         });
 
-        // Click on "Yes"
+        /* ==========================================================
+           6. Click on "Yes" (هحبك اوي) - Full Love Celebration Mode!
+           ========================================================== */
         btnYes.addEventListener('click', () => {
             success = true;
+            celebrationMode = true;
             clearTimeout(popupTimer);
-            
-            buttonsArea.style.display = 'none';
-            btnNo.style.display = 'none'; 
-            
-            mainTitle.innerText = "مراتي وحبيبتي يعم والله ❤️";
-            mainImage.src = "img/4.jpg";
+            dodgeTip.classList.remove('active');
 
-            mainContainer.style.transform = 'scale(1.1)';
-            mainContainer.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.2)';
+            // Hide action buttons cleanly
+            buttonsArea.style.display = 'none';
+            btnNo.style.display = 'none';
+
+            // Update main title & subtitle
+            mainTitle.innerHTML = "مراتي وحبيبتي يعم والله ❤️💍";
+            subQuote.innerHTML = "<span>🥩</span><span>حبيبتي والله هفضل اجبلك لحمة ❤️</span><span>🥩</span>";
             
-            // Reload particles for celebration
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": { "value": 100 },
-                    "color": { "value": ["#ff7675", "#fd79a8", "#d63031"] },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.8 },
-                    "size": { "value": 15, "random": true },
-                    "move": { "enable": true, "speed": 5, "direction": "top" }
-                }
-            });
+            // Switch image to final celebration image
+            mainImage.src = "img/4.jpg";
+            if (imageBadge) {
+                imageBadge.innerHTML = "<span>👑</span><span>أميرة قلبي الأبدية</span><span>👑</span>";
+                imageBadge.style.background = "linear-gradient(135deg, #d81159, #ff0a54)";
+            }
+
+            // Show celebration box & animate love meter to 100%
+            celebrationBox.style.display = 'block';
+            setTimeout(() => {
+                meterFill.style.width = '100%';
+            }, 200);
+
+            // Card celebration transformation & aura
+            mainContainer.style.transform = 'scale(1.02)';
+            mainContainer.style.boxShadow = '0 30px 80px rgba(255, 10, 84, 0.4), 0 0 50px rgba(255, 112, 166, 0.5)';
+            mainContainer.style.borderColor = 'rgba(255, 255, 255, 1)';
+
+            // Grand Symphony of chimes & confetti bursts
+            playCelebrationSymphony();
+
+            const rect = mainContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            triggerConfettiBurst(centerX, centerY, 60);
+            setTimeout(() => triggerConfettiBurst(centerX - 80, centerY, 35), 300);
+            setTimeout(() => triggerConfettiBurst(centerX + 80, centerY, 35), 600);
+            setTimeout(() => triggerConfettiBurst(centerX, centerY - 60, 45), 900);
         });
+
+        document.body.addEventListener('click', () => {
+            initAudio();
+        }, { once: true });
     </script>
 </body>
 </html>
